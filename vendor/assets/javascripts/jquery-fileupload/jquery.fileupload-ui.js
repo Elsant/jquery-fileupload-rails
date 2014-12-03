@@ -44,11 +44,11 @@
             autoUpload: false,
             // The following option limits the number of files that are
             // allowed to be uploaded using this widget:
-            maxNumberOfFiles: undefined,
+            maxNumberOfFiles: 15,
             // The maximum allowed file size:
-            maxFileSize: undefined,
+            maxFileSize: 3500000,
             // The minimum allowed file size:
-            minFileSize: undefined,
+            minFileSize: 10000,
             // The regular expression for allowed file types, matches
             // against either file type or file name:
             acceptFileTypes:  /.+$/i,
@@ -454,22 +454,22 @@
             // maxNumberOfFiles before validation, so we check if
             // maxNumberOfFiles is below 0 (instead of below 1):
             if (this.options.maxNumberOfFiles < 0) {
-                return 'Maximum number of files exceeded';
+                return "Превышено максимальное количество файлов";
             }
             // Files are accepted if either the file type or the file name
             // matches against the acceptFileTypes regular expression, as
             // only browsers with support for the File API report the type:
             if (!(this.options.acceptFileTypes.test(file.type) ||
                     this.options.acceptFileTypes.test(file.name))) {
-                return 'Filetype not allowed';
+                return "Неправильный тип файла";
             }
             if (this.options.maxFileSize &&
                     file.size > this.options.maxFileSize) {
-                return 'File is too big';
+                return "Файл слишком большой";
             }
             if (typeof file.size === 'number' &&
                     file.size < this.options.minFileSize) {
-                return 'File is too small';
+                return "Файл слишком маленький";
             }
             return null;
         },
